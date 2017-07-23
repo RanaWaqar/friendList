@@ -41,7 +41,6 @@ export default class Button extends React.Component {
 
         if( response.status === "connected" ) {
             this.FB.api('/me', function(response) {
-                console.log(response);
                 self.setState({name: response.name, id:response.id});
                 $.get( config.PATH() + '/facebook/login?name=' + response.name + '&id=' + response.id , self.login.bind(self));
             })

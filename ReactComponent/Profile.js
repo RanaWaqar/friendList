@@ -49,8 +49,8 @@ export default class Profile extends React.Component {
                     <div id="profileHead">
                         <h2>WELCOME {this.props.data.fullName}</h2>
                     </div>
-                    <div id="profileFriends" onClick={this.appUser.bind(this)}><h3>App Users</h3></div>
-                    <div id="profileAppUsers" onClick={this.getFriendList.bind(this)}><h3>Friends</h3></div>
+                    <div id="profileFriends" onClick={this.appUser.bind(this)}><h3>App Users(click me to see users)</h3></div>
+                    <div id="profileAppUsers" onClick={this.getFriendList.bind(this)}><h3>Friends (click me to see friends)</h3></div>
                     <ApplicationUser applicationUser={this.state.members} onClick={this.handleUsers.bind(this)}/>
                     <Pagination pages={this.state.totalElements} onClick={this.handlePagination.bind(this)} />
                 </div>
@@ -61,8 +61,8 @@ export default class Profile extends React.Component {
                  <div id="profileHead">
                      <h2>WELCOME {this.props.data.fullName}</h2>
                  </div>
-                 <div id="profileFriends" onClick={this.appUser.bind(this)}><h3>App Users</h3></div>
-                 <div id="profileAppUsers" onClick={this.getFriendList.bind(this)}><h3>Friends</h3></div>
+                 <div id="profileFriends" onClick={this.appUser.bind(this)}><h3>App Users(click me to see users)</h3></div>
+                 <div id="profileAppUsers" onClick={this.getFriendList.bind(this)}><h3>Friends(click me to see friends)</h3></div>
                  <FriendList friendList={this.state.friendsList}/>
              </div>
          );

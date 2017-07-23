@@ -145,7 +145,8 @@ function model(db) {
             return new Promise((resolve, reject) => {
 
                 let query = {
-                    socialMediaConnect:  {$ne: object.id}
+                    socialMediaConnect:  {$ne: object.id},
+                    "friends.email":{$ne : object.email}
                 }
 
                 let pageNumber = 1;
