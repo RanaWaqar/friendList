@@ -26,7 +26,8 @@ var development =  {
         clientSecret: "92cc472c8e8bc5c8d591eb58a06bcb88",
         callbackURL: "http://localhost:3000/auth/facebook/callback",
         profileFields:['email']
-    }
+    },
+    SECRET: 'ranawaqar'
 }
 
 var production = {

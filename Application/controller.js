@@ -21,7 +21,7 @@ function controller(req) {
             subject: 'welcome', // Subject line
             text: 'Hello world ?', // plain text body
             html: '<div style="background-color: #4F8A10; font-size: 25px; padding: 30px; width: 500px;border-radius: 10px">' +
-            'Welcome to friend App please click the link below <br/>'+ config.PATH() + '/jwt/verification?token=' + jwt.sign({email: req.body.email}, 'ranawaqar') +
+            'Welcome to friend App please click the link below <br/>'+ config.PATH() + '/jwt/verification?token=' + jwt.sign({email: req.body.email}, config.SECRET) +
             '</div>' // html body
         };
 
@@ -193,7 +193,7 @@ function controller(req) {
                 return;
             }
             let token = req.query.token;
-                let object = jwt.verify(token, 'ranawaqar');
+                let object = jwt.verify(token, config.SECRET);
             let email = "";
             if(object != null && object.email != null){
                 email = object.email
