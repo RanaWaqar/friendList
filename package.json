@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "webpack": "webpack --watch",
-    "start": "babel-node server.js"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
