@@ -57,6 +57,7 @@ function controller(req) {
 
             model.login(query)
                 .then((value) => {
+                req.session.user = value[0];
                     res.json(value[0]);
                 })
                 .catch((error) => {
@@ -220,6 +221,30 @@ function controller(req) {
                 })
 
 
+        },
+
+        checkIfSessionExist: (res) => {
+            if(req.session && req.session.user){
+                let email = req.session.user.email;
+                let password = req.session.user.password;
+                let query = {
+                    email: email,
+                    password: password
+                }
+                model.varifyLogin(query, {})
+                    .then((value) => {
+                    res.json({httpCode: 200, value: value});
+                    })
+                    .catch((error) => {
+                        res.json({httpCode: 400, message: error.message});
+                    })
+
+            }
+        },
+
+        logout: (res) => {
+            req.session.reset();
+            res.redirect('/');
         }
 
     });

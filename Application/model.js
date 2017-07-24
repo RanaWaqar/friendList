@@ -135,7 +135,8 @@ function model(db) {
                                 fullName: name,
                                 socialMediaConnect: id,
                                 friends: [],
-                                date: new Date()
+                                date: new Date(),
+                                verify: true
                             });
 
                         }

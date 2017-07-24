@@ -9970,7 +9970,8 @@ var Profile = function (_React$Component) {
                         )
                     ),
                     _react2.default.createElement(ApplicationUser, { applicationUser: this.state.members, onClick: this.handleUsers.bind(this) }),
-                    _react2.default.createElement(Pagination, { pages: this.state.totalElements, onClick: this.handlePagination.bind(this) })
+                    _react2.default.createElement(Pagination, { pages: this.state.totalElements, onClick: this.handlePagination.bind(this) }),
+                    _react2.default.createElement(LogoutButton, { onClick: this.props.onClick })
                 );
             } else if (this.state.view === "friends") {
                 return _react2.default.createElement(
@@ -10004,7 +10005,8 @@ var Profile = function (_React$Component) {
                             'Friends(click me to see friends)'
                         )
                     ),
-                    _react2.default.createElement(FriendList, { friendList: this.state.friendsList })
+                    _react2.default.createElement(FriendList, { friendList: this.state.friendsList }),
+                    _react2.default.createElement(LogoutButton, { onClick: this.props.onClick })
                 );
             }
         }
@@ -10123,6 +10125,29 @@ var Pagination = function (_React$Component4) {
     }]);
 
     return Pagination;
+}(_react2.default.Component);
+
+var LogoutButton = function (_React$Component5) {
+    _inherits(LogoutButton, _React$Component5);
+
+    function LogoutButton() {
+        _classCallCheck(this, LogoutButton);
+
+        return _possibleConstructorReturn(this, (LogoutButton.__proto__ || Object.getPrototypeOf(LogoutButton)).apply(this, arguments));
+    }
+
+    _createClass(LogoutButton, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'button',
+                { onClick: this.props.onClick },
+                ' Logout '
+            );
+        }
+    }]);
+
+    return LogoutButton;
 }(_react2.default.Component);
 
 /***/ }),
@@ -10256,6 +10281,18 @@ var Message = function (_React$Component) {
     }
 
     _createClass(Message, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            $.get('/checksession/', this.checkSession.bind(this));
+        }
+    }, {
+        key: 'checkSession',
+        value: function checkSession(data) {
+            if (data.httpCode == 200) {
+                $.post(_config2.default.PATH() + '/login', { email: data.value.email, password: data.value.password }, this.success.bind(this));
+            }
+        }
+    }, {
         key: 'setError',
         value: function setError() {
             this.setState({ error: {} });
@@ -10343,6 +10380,16 @@ var Message = function (_React$Component) {
             }
         }
     }, {
+        key: 'logout',
+        value: function logout() {
+            $.get('/logout', this.renderToLogin.bind(this));
+        }
+    }, {
+        key: 'renderToLogin',
+        value: function renderToLogin() {
+            this.setState({ view: 'login' });
+        }
+    }, {
         key: 'render',
         value: function render() {
             console.log(this.state);
@@ -10376,7 +10423,7 @@ var Message = function (_React$Component) {
             } else if (this.state.view == 'registration') {
                 return _react2.default.createElement(_Registration2.default, { onChange: this.registeration.bind(this), onClick: this.register.bind(this) });
             } else if (this.state.view === 'profile') {
-                return _react2.default.createElement(_Profile2.default, { data: this.state.profile, appUser: this.state.appUsers, totalElements: this.state.totalElements });
+                return _react2.default.createElement(_Profile2.default, { data: this.state.profile, appUser: this.state.appUsers, totalElements: this.state.totalElements, onClick: this.logout.bind(this) });
             }
         }
     }]);
@@ -22972,6 +23019,7 @@ var Button = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            console.log(this.state);
             if (this.state.view == "login") {
                 return _react2.default.createElement(
                     'div',

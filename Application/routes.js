@@ -41,6 +41,13 @@ function router() {
         controller(req).facebookVerification(res);
     });
 
+    router.get('/checksession', (req, res) => {
+        controller(req).checkIfSessionExist(res);
+    });
+
+    router.get('/logout', (req, res) => {
+        controller(req).logout(res);
+    })
     return router;
 }
 

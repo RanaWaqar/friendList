@@ -14,6 +14,15 @@ class Message extends React.Component {
         this.setError = this.setError.bind(this);
         this.user = {};
     }
+
+    componentDidMount(){
+    $.get('/checksession/', this.checkSession.bind(this));
+    }
+    checkSession(data) {
+        if(data.httpCode == 200){
+            $.post(config.PATH() + '/login', {email: data.value.email, password: data.value.password}, this.success.bind(this));
+        }
+    }
     setError(){
         this.setState({error: {}});
         this.setState({registerSuccess: {}});
@@ -97,6 +106,14 @@ class Message extends React.Component {
         }
     }
 
+    logout() {
+     $.get('/logout', this.renderToLogin.bind(this));
+    }
+
+    renderToLogin(){
+        this.setState({view: 'login'});
+    }
+
     render(){
         console.log(this.state);
     if(this.state.view == 'login' && Object.keys(this.state.error).length > 0){
@@ -130,7 +147,7 @@ class Message extends React.Component {
     }else if(this.state.view == 'registration') {
             return (<Registration onChange={this.registeration.bind(this)} onClick={this.register.bind(this)}/>);
         }else if(this.state.view === 'profile'){
-        return(<Profile data={this.state.profile} appUser={this.state.appUsers} totalElements={this.state.totalElements} />);
+        return(<Profile data={this.state.profile} appUser={this.state.appUsers} totalElements={this.state.totalElements} onClick={this.logout.bind(this)} />);
     }
 
     }

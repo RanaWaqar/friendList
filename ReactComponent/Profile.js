@@ -53,6 +53,7 @@ export default class Profile extends React.Component {
                     <div id="profileAppUsers" onClick={this.getFriendList.bind(this)}><h3>Friends (click me to see friends)</h3></div>
                     <ApplicationUser applicationUser={this.state.members} onClick={this.handleUsers.bind(this)}/>
                     <Pagination pages={this.state.totalElements} onClick={this.handlePagination.bind(this)} />
+                    <LogoutButton onClick={this.props.onClick} />
                 </div>
             );
         }else if(this.state.view === "friends"){
@@ -64,6 +65,7 @@ export default class Profile extends React.Component {
                  <div id="profileFriends" onClick={this.appUser.bind(this)}><h3>App Users(click me to see users)</h3></div>
                  <div id="profileAppUsers" onClick={this.getFriendList.bind(this)}><h3>Friends(click me to see friends)</h3></div>
                  <FriendList friendList={this.state.friendsList}/>
+                 <LogoutButton onClick={this.props.onClick} />
              </div>
          );
      }
@@ -145,4 +147,12 @@ class Pagination extends React.Component {
         )
     }
 
+}
+
+class LogoutButton extends  React.Component{
+    render(){
+        return(
+            <button onClick={this.props.onClick}> Logout </button>
+        );
+    }
 }

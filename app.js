@@ -7,6 +7,7 @@ const NODE_CONFIGRATIONS = require('./config/config');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const expValidator = require('express-validator');
+const session = require('client-sessions');
 //endregion
 
 //region app.use
@@ -15,6 +16,12 @@ app.use(express.static('HTML'));
 app.use(expValidator(expressvalidator()));
 app.use(cors());
 
+app.use(session({
+    cookieName: 'session',
+    secret: NODE_CONFIGRATIONS.SECRET,
+    duration: 30 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000,
+}));
 
 
 // parse application/x-www-form-urlencoded
