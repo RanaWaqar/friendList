@@ -2,7 +2,7 @@
 This is a facebook base React application where you can see all users and add them to your user
 
 the technologies are used in it is following:
-NodeJs, JavaScript(es6), MongoDB, ReactJS
+NodeJs, JavaScript(es6), MongoDB, ReactJS, Webpack, babel
 
 please follow these instructions to run this project.
 
