@@ -21,8 +21,9 @@ function controller(req) {
             subject: 'welcome', // Subject line
             text: 'Hello world ?', // plain text body
             html: '<div style="background-color: #4F8A10; font-size: 25px; padding: 30px; width: 500px;border-radius: 10px">' +
-            'Welcome to friend App please click the link below <br/>'+ config.PATH() + '/jwt/verification?token=' + jwt.sign({email: req.body.email}, config.SECRET) +
-            '</div>' // html body
+            'Welcome to friend App please click the link below <br/>' +
+            '<a href="' + config.PATH() + '/jwt/verification?token=' + jwt.sign({email: req.body.email}, config.SECRET) +
+            '">verify your email</a></div>' // html body
         };
 
         // send mail with defined transport object
@@ -79,6 +80,7 @@ function controller(req) {
             let requestBody = req.body;
             requestBody.fullName = requestBody.firstName + " " + requestBody.lastName;
             requestBody.date = new Date();
+            requestBody.verify = false;
             model.checkEmailExist(requestBody)
                 .then(model.signUp)
                 .then((value) => {

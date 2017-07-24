@@ -10,7 +10,11 @@ function model(db) {
                         reject(err);
                     } else {
                         if (response.length > 0) {
+                            if(response[0].verify == true)
                             resolve(response);
+                            else{
+                                reject({message: "please verify your email"});
+                            }
                         } else {
                             reject({message: "user not found"});
                         }
@@ -167,6 +171,9 @@ function model(db) {
                     if(err){
                         reject(err);
                     }else{
+                        if(response != null){
+                            db.collection(userCollection).update({email: response.email},{$set:{verify: true}});
+                        }
                         resolve(response);
                     }
                 })

@@ -23076,7 +23076,6 @@ var FacebookButton = function (_React$Component3) {
     _createClass(FacebookButton, [{
         key: 'render',
         value: function render() {
-
             return _react2.default.createElement(
                 'div',
                 null,

@@ -96,17 +96,14 @@ export class Login extends React.Component {
     }
 }
 
+class FacebookButton extends React.Component {
 
-
- class FacebookButton extends React.Component {
     constructor(props) {
         super(props);
 
     }
 
-
     render() {
-
                 return (
                     <div>
                         <div
@@ -119,9 +116,5 @@ export class Login extends React.Component {
                         </div>
                     </div>
                 );
-
-
-
-
     }
 }
